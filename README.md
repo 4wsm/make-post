@@ -33,6 +33,41 @@ To create a new post and open the file for editing:
 To create a new post without opening a file:
 
 `make-post.sh 'Everything is okay'`
+# README
+
+## NAME
+
+`make-post` - shell script for jekyll post creating automation
+
+## SYNOPSIS
+
+`jekyll_post.sh [OPTIONS] [TITLE]`
+
+## DESCRIPTION
+
+The `make-post.sh` script allows you to execute Jekyll commands and open files related to your Jekyll site. It assumes the [Docker container][jekyll container] running the Jekyll image is already set up, running in deamon (server and [jekyll compose][jekyll compose]plugin installed.
+
+## OPTIONS
+
+`-e [TITLE]`
+
+Create a new post with the given `[TITLE]` and open the corresponding file for editing.
+
+If the `[TITLE]` contains spaces, they will be replaced with hyphens ' - ' automatically.
+
+## ARGUMENT
+
+The `[TITLE]` argument is the title of the post to be created.
+
+## USAGE EXAMPLES
+
+To create a new post and open the file for editing:
+
+`make-post.sh -e 'Everything is okay'`
+
+To create a new post without opening a file:
+
+`make-post.sh 'Everything is okay'`
 
 Note: Replace "my-post-title" with the desired title for the post.
 
