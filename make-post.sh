@@ -1,46 +1,36 @@
 #!/bin/bash
 
-open_file() {
-  if [ -z "$EDITOR" ]; then
-    if command -v vim >/dev/null; then
-      /usr/bin/vim "$1"
-    else
-      echo "No editor set in the EDITOR environment variable and Vim not found."
-      exit 1
-    fi
-  else
-    if ! command -v "$EDITOR" >/dev/null; then
-      echo "Editor '$EDITOR' not found or not executable."
-      exit 1
-    fi
+editor=''
+post_path=''
+jekyll_containter_name=''
 
-    "$EDITOR" "$2"
-  fi
+open_file() {
+    "$editor" "$1"
 }
 
-if docker ps --filter "name=jekyll" --format '{{.Names}}' | grep -q "jekyll"; then
+if docker ps --filter "name=$jekyll_containter_name" --format '{{.Names}}' | grep -q "$jekyll_containter_name"; then
   case "$1" in
   -e)
-    docker exec -d jekyll bundle exec jekyll post "$2"
-    echo -n "opening file..."
+    docker exec -d $jekyll_containter_name bundle exec jekyll post "$2"
+    echo -n "opening file in $post_path ..."
     sleep 5
 
     sanitized_filename=$(echo "$2" | tr ' ' '-')
 
-    file_path=$(find "$HOME/docker/jekyll/jekyll-site/volume/_posts" -type f -iname "*$sanitized_filename*")
+    file_path=$(find "$post_path" -type f -iname "*$sanitized_filename*")
     if [ -n "$file_path" ]; then
       open_file "$file_path"
     else
-      echo "Error: File $sanitized_filename not found in '~/docker/jekyll/jekyll-site/volume/_posts'."
+      echo "Error: File $sanitized_filename not found in '$post_path'."
       exit 1
     fi
     ;;
 
   *)
-    docker exec -d jekyll bundle exec jekyll post "$1"
+    docker exec -d $jekyll_containter_name bundle exec jekyll post "$1"
     ;;
   esac
 else
-  echo "Error: Docker container 'jekyll' is not running."
+  echo "Error: Docker container '$jekyll_containter_name' is not running."
   exit 1
 fi
