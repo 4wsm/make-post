@@ -31,7 +31,7 @@ The `<title>` argument is the title of the post to be created.
 To create a new post and open the file for editing:
 `make-post.sh -e 'Everything is okay'`
 
-To execute a Jekyll command without opening a file:
+To create a new post without opening a file:
 `make-post.sh 'Everything is okay'`
 
 Note: Replace "my-post-title" with the desired title for the post.
