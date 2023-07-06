@@ -10,7 +10,7 @@
 
 ## DESCRIPTION
 
-The `make-post.sh` script allows you to execute Jekyll commands and open files related to your Jekyll site. It assumes the [Docker container][jekyll container] running the Jekyll image is already set up, running in deamon (server and [jekyll compose][jekyll compose]plugin installed.
+The `make-post.sh` script allows you to execute Jekyll commands and open files related to your Jekyll site. It assumes the [Docker container][jekyll container] running the Jekyll image is already set up, running in deamon (jekyll serve) and that [jekyll compose][jekyll compose] plugin is installed.
 
 ## OPTIONS
 
@@ -33,8 +33,6 @@ To create a new post and open the file for editing:
 To create a new post without opening a file:
 
 `make-post.sh 'Everything is okay'`
-
-Note: Replace "my-post-title" with the desired title for the post.
 
 ## ENVIRONMENT VARIABLES
 
